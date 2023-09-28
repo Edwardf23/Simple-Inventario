@@ -11,12 +11,34 @@ public class SimpleInventario {
     return 0.00;
     }
     public static void imprimiendoinventario(){
-        System.out.println("Ingrese una opcion: ");
+        Scanner scanner =  new Scanner(System.in);
+        System.out.println("Ingrese su nombre");
+        String usuario=scanner.next();
+         System.out.println("Bienvenid@ "+ usuario);
+
+         String articuloExistente = obtenerNombreArticulo();
+         System.out.println("Articulo existente: " +articuloExistente);
+
+
     }
     public static void main(String[] args) {
        imprimiendoinventario();
     }
+    public static String obtenerNombreArticulo(){
+        Scanner scanner = new Scanner (System.in);
+        System.out.println("Ingrese el nombre del articulo");
+        String nombreArticulo= scanner.next();
+        System.out.println("Usted ha ingresado el articulo" + nombreArticulo);
+        return nombreArticulo;
+
+
+
+
+
+   }
+
 
 }
+
 
 
