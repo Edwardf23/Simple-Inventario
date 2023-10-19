@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 public class SimpleInventario {
     public static void agregarArticulo(String s) {
         System.out.println("Agregar un articulo:  ");
@@ -7,11 +8,6 @@ public class SimpleInventario {
         } else{
             System.out.println("No se permite este Articulo");
         }
-
-
-
-
-
     }
 
     public static void removerArticulo(int id){
@@ -19,17 +15,33 @@ public class SimpleInventario {
             System.out.println("Articulo Removido");
         }
     }
-    public static String obtenerPrecioArticulo(String articulo,double precio){
-        double random=(Math.random()* 5000) + 100;
-        if (articulo.startsWith("mar")&&precio>=0.00){
-            return "Articulo "+articulo +" tiene un valor de RD$  " + random;
-        } else if (articulo.startsWith("tab")||precio>=12000.00){
-            return "Articulo "+articulo+" tiene un valor de que sobrepasa 12,000.00."+" El monto es de RD$ "+ random;
-        }else{
-            return "Ninguno de los escenario pudo aplicar";
-        }
 
+    public static double obtenerPrecioArticulo(String articulo){
+        double random=(Math.random()* 5000) + 100;
+        return random;
     }
+
+    public static void modificarArticulo(){
+        String nombrearticulo = obtenerNombredelArticulo();
+        double precio = obtenerPrecioArticulo(nombrearticulo);
+
+        if(nombrearticulo.toLowerCase().startsWith("a") || nombrearticulo.toLowerCase().startsWith("d")){
+            if(precio >= 150 && precio <= 250){
+                precio += precio * 0.02;
+                System.out.println("El nombre del articulo es " + nombrearticulo + " y el precio actualizado es " + precio);
+            } else if(precio > 250 && precio <= 500){
+                precio += precio * 0.08;
+                System.out.println("El nombre del articulo es " + nombrearticulo + " y el precio actualizado es " + precio);
+            } else {
+                precio += precio * 0.12;
+                System.out.println("El nombre del articulo es " + nombrearticulo + " y el precio actualizado es " + precio);
+            }
+        } else if(nombrearticulo.toLowerCase().startsWith("co") || nombrearticulo.toLowerCase().startsWith("m")){
+            precio -= precio * 0.20;
+            System.out.println("El nombre del articulo es " + nombrearticulo + " y el precio actualizado es " + precio);
+        }
+    }
+
     public static void imprimiendoinventario(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Ingrese su nombre: ");
@@ -38,11 +50,11 @@ public class SimpleInventario {
 
         String articuloExistente = obtenerNombredelArticulo();
         System.out.println("Articulo existente: " +articuloExistente);
-
-
     }
+
     public static void main(String[] args) {
         imprimiendoinventario();
+        modificarArticulo();
     }
 
     public static String obtenerNombredelArticulo(){
@@ -52,9 +64,7 @@ public class SimpleInventario {
         nombrearticulo= scanner.next();
         System.out.println("Usted ha ingresado el articulo: "+ nombrearticulo);
         return nombrearticulo;
-
-
-
     }
-
 }
+
+
