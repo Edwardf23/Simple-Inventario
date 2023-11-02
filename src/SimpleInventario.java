@@ -1,69 +1,49 @@
 import java.util.Scanner;
 
 public class SimpleInventario {
+    // Se crea una variable estática de arreglo llamada "articulos" con 5 elementos de tipo String
+    private static String[] articulos = new String[5];
+
     public static void agregarArticulo(String s) {
-        System.out.println("Agregar un articulo:  ");
-        if(s.length()>4){
-            System.out.println("Articulo agregado exitosamente!");
-        } else{
-            System.out.println("No se permite este Articulo");
+        // Se itera sobre el arreglo para asignar el valor del método "obtenerNombredeArticulo" a cada elemento del arreglo
+        for (int i = 0; i < articulos.length; i++) {
+            articulos[i] = obtenerNombredeArticulo();
         }
+        System.out.println("Artículos agregados exitosamente al inventario.");
     }
 
-    public static void removerArticulo(int id){
-        if (id>0){
-            System.out.println("Articulo Removido");
-        }
-    }
-
-    public static double obtenerPrecioArticulo(String articulo){
-        double random=(Math.random()* 5000) + 100;
-        return random;
-    }
-
-    public static void modificarArticulo(){
-        String nombrearticulo = obtenerNombredelArticulo();
-        double precio = obtenerPrecioArticulo(nombrearticulo);
-
-        if(nombrearticulo.toLowerCase().startsWith("a") || nombrearticulo.toLowerCase().startsWith("d")){
-            if(precio >= 150 && precio <= 250){
-                precio += precio * 0.02;
-                System.out.println("El nombre del articulo es " + nombrearticulo + " y el precio actualizado es " + precio);
-            } else if(precio > 250 && precio <= 500){
-                precio += precio * 0.08;
-                System.out.println("El nombre del articulo es " + nombrearticulo + " y el precio actualizado es " + precio);
-            } else {
-                precio += precio * 0.12;
-                System.out.println("El nombre del articulo es " + nombrearticulo + " y el precio actualizado es " + precio);
-            }
-        } else if(nombrearticulo.toLowerCase().startsWith("co") || nombrearticulo.toLowerCase().startsWith("m")){
-            precio -= precio * 0.20;
-            System.out.println("El nombre del articulo es " + nombrearticulo + " y el precio actualizado es " + precio);
-        }
-    }
-
-    public static void imprimiendoinventario(){
+    public static void imprimirInventario() {
+        // Se crea un objeto Scanner para leer el nombre del usuario
         Scanner scanner = new Scanner(System.in);
         System.out.println("Ingrese su nombre: ");
-        String usuario = scanner.next();
-        System.out.println("Bienvenid@ "+ usuario);
+        String usuario = scanner.nextLine();
+        System.out.println("Bienvenid@ " + usuario);
 
-        String articuloExistente = obtenerNombredelArticulo();
-        System.out.println("Articulo existente: " +articuloExistente);
+        // Se imprime el mensaje "Articulos registrados:" seguido de los elementos del arreglo
+        System.out.println("Artículos registrados: ");
+        for (String articulo : articulos) {
+            if (articulo != null) {
+                System.out.println(articulo);
+            }
+        }
     }
 
     public static void main(String[] args) {
-        imprimiendoinventario();
-        modificarArticulo();
+        agregarArticulo("");
+        imprimirInventario();
     }
 
-    public static String obtenerNombredelArticulo(){
+    public static String obtenerNombredeArticulo() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingrese el nombre del articulo: ");
-        String nombrearticulo;
-        nombrearticulo= scanner.next();
-        System.out.println("Usted ha ingresado el articulo: "+ nombrearticulo);
-        return nombrearticulo;
+        System.out.println("Ingrese el nombre del artículo: ");
+        String nombrearticulo = scanner.nextLine();
+        if (nombrearticulo.length() > 3) {
+            System.out.println("Usted ha ingresado un artículo: " + nombrearticulo);
+            return nombrearticulo;
+        } else {
+            System.out.println("El nombre del artículo es demasiado corto.");
+            return "";
+        }
     }
 }
 
